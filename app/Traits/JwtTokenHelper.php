@@ -26,7 +26,7 @@ trait JwtTokenHelper
         return $token;
     }
 
-    protected function decodeToken($token)
+    protected function decodeToken($token):string
     {
         $publicKey = file_get_contents(storage_path('app/public/keys/public-key.pem'));
 
