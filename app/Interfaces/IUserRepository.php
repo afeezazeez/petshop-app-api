@@ -40,6 +40,9 @@ interface IUserRepository
 
     public function deleteUser(string $uuid):void;
 
+    public function deleteAuthUser():void;
+
+
 
 
 

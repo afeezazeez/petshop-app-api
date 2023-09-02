@@ -126,5 +126,28 @@ class UserController extends Controller
     }
 
 
+    /**
+     * @OA\DELETE(
+     *     path="/api/v1/user",
+     *     tags={"User Api Endpoints"},
+     *     summary="Delete  User Account",
+     *      security={{"bearerAuth":{}}},
+     *     @OA\Response(response=200,description="OK"),
+     *     @OA\Response(response=401,description="Unauthorized"),
+     *     @OA\Response(response=404,description="Page not found"),
+     *     @OA\Response(response=422,description="Unprocessable Entity"),
+     *     @OA\Response(response=500,description="Internal server error")
+     *
+     * )
+     */
+
+    public function destroy(): JsonResponse
+    {
+        $this->userService->deleteUser();
+
+        return successResponse();
+    }
+
+
 
 }

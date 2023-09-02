@@ -130,6 +130,18 @@ class UserRepository implements IUserRepository
 
     }
 
+    /**
+     * delete authenticated user account
+     */
+    public function deleteAuthUser():void
+    {
+        if (auth()->user()){
+            auth()->user()->delete();
+        }
+    }
+
+
+
 
 
 }
