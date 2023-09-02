@@ -31,4 +31,23 @@ class PasswordResetService
        return $this->passwordResetRepository->createToken($email);
 
     }
+
+    /**
+     * Reset password and delete token
+     *
+     */
+    public function resetPassword(string $email): void
+    {
+
+        $existingToken = $this->passwordResetRepository->getByEmail($email);
+
+        if ($existingToken) {
+            $this->passwordResetRepository->deleteToken($existingToken);
+        }
+
+    }
+
+
+
+
 }
