@@ -13,26 +13,30 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/v1/file": {
+        "/api/v1/admin/login": {
             "post": {
                 "tags": [
-                    "Files"
+                    "Admin Api Endpoints"
                 ],
-                "summary": "upload a file",
-                "operationId": "a4baaef57360c74c76fae98d35ac0fd4",
+                "summary": "Login",
+                "operationId": "Login in Admin",
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "multipart/form-data": {
+                        "application/x-www-form-urlencoded": {
                             "schema": {
                                 "required": [
-                                    "file"
+                                    "email",
+                                    "password"
                                 ],
                                 "properties": {
-                                    "file": {
-                                        "description": "file to upload",
-                                        "type": "string",
-                                        "format": "binary"
+                                    "email": {
+                                        "description": "Admin Email",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Admin password",
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"

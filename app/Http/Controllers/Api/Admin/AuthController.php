@@ -19,17 +19,19 @@ class AuthController extends Controller
 
     /**
      * @OA\POST(
-     *     path="/api/login",
-     *     tags={"Authentication"},
+     *     path="/api/v1/admin/login",
+     *     tags={"Admin Api Endpoints"},
      *     summary="Login",
+     *     operationId="Login in Admin",
+     *
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\MediaType(
      *             mediaType="application/x-www-form-urlencoded",
      *            @OA\Schema(
      *                 type="object",
-     *                 @OA\Property(property="email",description="User Email",type="string"),
-     *                 @OA\Property(property="password",description="User password",type="string"),
+     *                 @OA\Property(property="email",description="Admin Email",type="string"),
+     *                 @OA\Property(property="password",description="Admin password",type="string"),
      *                 required={"email", "password"}
      *             )
      *         ),

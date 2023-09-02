@@ -18,6 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'Api', 'prefix' => 'v1'], function (): void {
 
     Route::group(['prefix' => 'admin'], function (): void {
-      Route::get('login',[AuthController::class,'store']);
+      Route::post('login',[AuthController::class,'store']);
     });
 });
