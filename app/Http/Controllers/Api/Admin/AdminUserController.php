@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateAdminRequest;
 use App\Http\Requests\Admin\UpdateUserRequest;
 use App\Services\AdminService;
@@ -160,6 +161,31 @@ class AdminUserController extends Controller
         $data = $this->adminService->updateUser($uuid,$request->validated());
 
         return successResponse($data);
+    }
+
+    /**
+     * @OA\DELETE(
+     *     path="/api/v1/admin/user-delete/{uuid}",
+     *     tags={"Admin Api Endpoints"},
+     *     summary="Delete  User Account",
+     *      security={{"bearerAuth":{}}},
+     *      @OA\Parameter(name="uuid",in="path",required=true,
+     *         @OA\Schema(type="string"),
+     *         style="form"),
+     *     @OA\Response(response=200,description="OK"),
+     *     @OA\Response(response=401,description="Unauthorized"),
+     *     @OA\Response(response=404,description="Page not found"),
+     *     @OA\Response(response=422,description="Unprocessable Entity"),
+     *     @OA\Response(response=500,description="Internal server error")
+     *
+     * )
+     */
+
+    public function destroy(string $uuid): JsonResponse
+    {
+        $this->adminService->deleteUser($uuid);
+
+        return successResponse();
     }
 }
 

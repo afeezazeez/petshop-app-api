@@ -31,7 +31,7 @@ class UserRepository implements IUserRepository
 
 
     /**
-     * Find user by email
+     * Find admin by email
      *
      * @param string $email
      * @return User|null
@@ -43,15 +43,38 @@ class UserRepository implements IUserRepository
     }
 
     /**
+     * Find user by email
+     *
+     * @param string $email
+     * @return User|null
+     */
+    public function findUserByEmail(string $email): User|null
+    {
+        return $this->model->where('email', $email)
+            ->where('is_admin',0)->first();
+    }
+
+
+
+    /**
      * Create admin
      * @param array<string,mixed> $data
      * @return User
      */
-
-
     public function createAdmin(array $data): User
     {
         $data = Arr::add($data, 'is_admin', 1);
+        return $this->model->create($data);
+    }
+
+    /**
+     * Create admin
+     * @param array<string,mixed> $data
+     * @return User
+     */
+    public function createUserAccount(array $data): User
+    {
+        $data = Arr::add($data, 'is_admin', 0);
         return $this->model->create($data);
     }
 
@@ -82,5 +105,16 @@ class UserRepository implements IUserRepository
         $user->update($data);
         return $user;
     }
+
+    /**
+     * delete user
+     */
+    public function deleteUser(string $uuid):void
+    {
+       User::where('uuid',$uuid)->delete();
+
+    }
+
+
 
 }

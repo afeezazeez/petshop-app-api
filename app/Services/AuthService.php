@@ -27,9 +27,13 @@ class AuthService
      * @throws ClientErrorException
      * @throws AuthenticationException
      */
-    public function login(array $request): array
+    public function login(array $request, string $user_type = "user"): array
     {
-        $user = $this->userRepository->findAdminByEmail($request['email']);
+        if ($user_type === "admin"){
+            $user = $this->userRepository->findAdminByEmail($request['email']);
+        }else{
+            $user = $this->userRepository->findUserByEmail($request['email']);
+        }
 
         if (!$user || !is_string($user->password) || !password_verify($request['password'], $user->password)) {
             throw new ClientErrorException('Incorrect password!');

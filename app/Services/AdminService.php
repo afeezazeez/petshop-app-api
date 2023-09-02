@@ -39,20 +39,9 @@ class AdminService
         $user = $this->userRepository->createAdmin($request);
         $loginAdmin = app(AuthService::class)->login(['email' => $request['email'], 'password' => $request['password']]);
 
-        $data = [
-            'uuid' => $user->uuid,
-            'first_name' => $user->first_name,
-            'last_name' => $user->last_name,
-            'email' => $user->email,
-            'address' => $user->address,
-            'phone_number' => $user->phone_number,
-            'updated_at' => $user->updated_at,
-            'created_at' => $user->created_at,
-            'token' => $loginAdmin['token'],
-        ];
-
-        return $data;
+        return $this->fetch($user, $loginAdmin['token']);
     }
+
 
     /**
      * Create admin
@@ -66,6 +55,38 @@ class AdminService
 
     }
 
+    /**
+     * Create admin
+     *
+     */
+    public function deleteUser(string $uuid):void
+    {
+        $this->userRepository->deleteUser($uuid);
+
+    }
+
+    /**
+     * @param User $user
+     * @param $token
+     * @return array
+     * @return array<string,mixed>
+     */
+    public function fetch(User $user, string $token): array
+    {
+        $data = [
+            'uuid' => $user->uuid,
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
+            'email' => $user->email,
+            'address' => $user->address,
+            'phone_number' => $user->phone_number,
+            'updated_at' => $user->updated_at,
+            'created_at' => $user->created_at,
+            'token' => $token,
+        ];
+
+        return $data;
+    }
 
 
 }

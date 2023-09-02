@@ -46,7 +46,7 @@ class AuthController extends Controller
 
     public function store(LoginRequest $request): JsonResponse
     {
-        $data = $this->authService->login($request->validated());
+        $data = $this->authService->login($request->validated(),"admin");
 
         return successResponse($data);
     }

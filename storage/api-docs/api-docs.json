@@ -19,7 +19,7 @@
                     "Admin Api Endpoints"
                 ],
                 "summary": "Fetch Users",
-                "operationId": "4e85f93e6680e6f5fa7d927d39ae171a",
+                "operationId": "118bd92b1e91c95406bc4baacb441122",
                 "parameters": [
                     {
                         "name": "page",
@@ -136,7 +136,7 @@
                     "Admin Api Endpoints"
                 ],
                 "summary": "Create admin acccount",
-                "operationId": "57342e80c89b23238560d2a83f1c051f",
+                "operationId": "aef852f3b533bb58f4d2dbcb8bf2a845",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -220,7 +220,7 @@
                     "Admin Api Endpoints"
                 ],
                 "summary": "Edit a User Account",
-                "operationId": "f7b69a794e7c289d3320ad314b0c93c8",
+                "operationId": "66e650f63b119cb703a8b2bd7451b9e5",
                 "parameters": [
                     {
                         "name": "uuid",
@@ -290,6 +290,48 @@
                         }
                     }
                 },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/admin/user-delete/{uuid}": {
+            "delete": {
+                "tags": [
+                    "Admin Api Endpoints"
+                ],
+                "summary": "Delete  User Account",
+                "operationId": "d3efd47f7c3f7a34a9db0efb3794d897",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -393,6 +435,90 @@
                         "bearerAuth": []
                     }
                 ]
+            }
+        },
+        "/api/v1/user/create": {
+            "post": {
+                "tags": [
+                    "User Api Endpoints"
+                ],
+                "summary": "Create user acccount",
+                "operationId": "a57509486c5414fb371655b6d5762555",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "first_name",
+                                    "last_name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation",
+                                    "avatar",
+                                    "address",
+                                    "phone_number"
+                                ],
+                                "properties": {
+                                    "first_name": {
+                                        "description": "User firstname",
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "description": "User lastname",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "description": "User Email",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "User password",
+                                        "type": "string"
+                                    },
+                                    "password_confirmation": {
+                                        "description": "User password",
+                                        "type": "string"
+                                    },
+                                    "avatar": {
+                                        "description": "Avatar image UUID",
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "description": "User main address",
+                                        "type": "string"
+                                    },
+                                    "phone_number": {
+                                        "description": "User main  phone number",
+                                        "type": "string"
+                                    },
+                                    "is_marketing": {
+                                        "description": "User marketing preferences",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
             }
         }
     },

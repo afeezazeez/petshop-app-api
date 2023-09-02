@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\Api\Admin\AdminUserController;
 use App\Http\Controllers\Api\Admin\AuthController;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\Api\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,8 +28,15 @@ Route::group(['namespace' => 'Api', 'prefix' => 'v1'], function (): void {
             Route::get('logout',[AuthController::class,'destroy']);
             Route::get('user-listing',[AdminUserController::class,'index']);
             Route::put('user-edit/{uuid}',[AdminUserController::class,'update']);
+            Route::delete('user-delete/{uuid}',[AdminUserController::class,'destroy']);
 
         });
+
+    });
+
+    Route::group(['prefix' => 'user'], function (): void {
+
+        Route::post('create',[UserController::class,'store']);
 
     });
 

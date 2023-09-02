@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->uuid();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('order_status_id')->constrained();
-            $table->foreignId('payment_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('order_status_id')->constrained()->onDelete('cascade');
+            $table->foreignId('payment_id')->constrained()->onDelete('cascade');
             $table->json('products');
             $table->json('address');
             $table->float('delivery_fee',8,2)->nullable();
