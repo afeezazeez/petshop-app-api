@@ -19,7 +19,9 @@ class DatabaseSeeder extends Seeder
             BrandSeeder::class,
             FileSeeder::class,
             ProductSeeder::class,
-            OrderStatusSeeder::class
+            OrderStatusSeeder::class,
+            PaymentSeeder::class,
+            OrderSeeder::class
        ]);
     }
 }

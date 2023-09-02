@@ -26,7 +26,7 @@ return new class extends Migration
             $table->boolean('is_marketing')->default(0);
             $table->rememberToken();
             $table->timestamps();
-            $table->timestamp('last_login_at');
+            $table->timestamp('last_login_at')->nullable();
         });
     }
 

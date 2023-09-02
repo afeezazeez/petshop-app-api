@@ -25,7 +25,7 @@ class ProductFactory extends Factory
         return [
             'category_uuid' => $category->uuid,
             'title' => fake()->text(10),
-            'price' => fake()->randomFloat(2,0,3),
+            'price' => fake()->randomFloat(2,100,1000),
             'description' => fake()->text(50),
             'metadata'  => [
                 'brand' => $brand->uuid,
