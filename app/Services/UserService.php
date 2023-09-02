@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Interfaces\IUserRepository;
+use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 class UserService
 {
@@ -39,6 +41,19 @@ class UserService
             'token' => $loginUser['token'],
         ];
         return $data;
+    }
+
+
+    /**
+     * Update user
+     *
+     * @param array<string,mixed> $request
+     */
+    public function updateUser(array $request): User|null
+    {
+        $data = array_diff_key($request, array_flip(['password', 'password_confirmation']));
+        return $this->userRepository->updateUserAccount($data);
+
     }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Interfaces;
 
 use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 interface IUserRepository
 {
@@ -30,6 +31,12 @@ interface IUserRepository
      * @param array<string,mixed> $data
      */
     public function updateUser(string $uuid, array $data): User;
+
+    /**
+     * @param array<string,mixed> $data
+     */
+    public function updateUserAccount(array $data):  User|null;
+
 
     public function deleteUser(string $uuid):void;
 

@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Filters\ModelsFilter;
 use App\Interfaces\IUserRepository;
 use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Routing\Pipeline;
 use Illuminate\Support\Arr;
 
@@ -68,7 +69,7 @@ class UserRepository implements IUserRepository
     }
 
     /**
-     * Create admin
+     * Create user account
      * @param array<string,mixed> $data
      * @return User
      */
@@ -105,6 +106,20 @@ class UserRepository implements IUserRepository
         $user->update($data);
         return $user;
     }
+
+    /**
+     * update user
+     * @param array<string,mixed> $data
+     */
+    public function updateUserAccount(array $data): User|null
+    {
+        $user = auth()->user();
+        if ($user){
+            $user->update($data);
+        }
+        return $user;
+    }
+
 
     /**
      * delete user

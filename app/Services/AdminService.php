@@ -44,7 +44,7 @@ class AdminService
 
 
     /**
-     * Create admin
+     * update user
      *
      * @param array<string,mixed> $request
      */
@@ -56,7 +56,7 @@ class AdminService
     }
 
     /**
-     * Create admin
+     * delete user
      *
      */
     public function deleteUser(string $uuid):void

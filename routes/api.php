@@ -41,6 +41,7 @@ Route::group(['namespace' => 'Api', 'prefix' => 'v1'], function (): void {
 
         Route::middleware(['jwt'])->group(function () {
             Route::get('',[UserController::class,'show']);
+            Route::put('edit',[UserController::class,'update']);
             Route::get('logout',[UserAuthController::class,'destroy']);
 
         });
