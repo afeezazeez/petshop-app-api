@@ -24,11 +24,7 @@ class Product extends Model
         'metadata'
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<int, string>
-     */
+
     protected $casts = [
         'metadata' => 'json'
     ];
