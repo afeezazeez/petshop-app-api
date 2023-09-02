@@ -2,18 +2,21 @@
 
 namespace App\Services\Auth;
 
+use App\Exceptions\ClientErrorException;
 use Firebase\JWT\Key;
 use Illuminate\Auth\GuardHelpers;
 use Illuminate\Contracts\Auth\Guard;
 use Firebase\JWT\JWT;
+use  Illuminate\Contracts\Auth\UserProvider;
 
 class JwtGuard implements Guard
 {
     use GuardHelpers;
 
-    protected $provider;
+    protected   $provider;
 
-    public function __construct($provider)
+
+    public function __construct(?UserProvider $provider)
     {
         $this->provider = $provider;
     }
@@ -33,6 +36,10 @@ class JwtGuard implements Guard
         try {
             $publicKey = file_get_contents(storage_path('app/public/keys/public-key.pem'));
 
+            if (!$publicKey){
+                throw new ClientErrorException("Error encountered while fetching public key");
+            }
+
             $decoded = JWT::decode($token, new Key($publicKey, 'RS256'));
 
             $this->user = $this->provider->retrieveById($decoded->user_uuid);
@@ -44,7 +51,12 @@ class JwtGuard implements Guard
         return $this->user;
     }
 
-    public function attempt(array $credentials = [], $remember = false)
+    /**
+     *
+     *
+     * @param array<string,mixed> $credentials
+     */
+    public function attempt(array $credentials = []): bool
     {
         $user = $this->provider->retrieveByCredentials($credentials);
 
@@ -59,9 +71,14 @@ class JwtGuard implements Guard
 
 
 
-    // Implement other methods required by the Guard interface (check, attempt, etc.).
-    public function validate(array $credentials = [])
+    /**
+     * @param array<string,mixed> $credentials
+     *
+     */
+    public function validate(array $credentials = []):bool
     {
-        // TODO: Implement validate() method.
+        return true;
     }
+
+
 }

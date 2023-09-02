@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Traits\JwtTokenHelper;
 use Closure;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Illuminate\Http\Response;
 
@@ -18,14 +20,22 @@ class JwtMiddleware
     /**
      * @throws AuthenticationException
      */
-    public function handle($request, Closure $next)
+    public function handle(Request$request, Closure $next): Response|JsonResponse
+
     {
         // Check for the presence of the Authorization header
         if (!$request->hasHeader('Authorization')) {
             throw new AuthenticationException("Unauthorized");
         }
 
+
+
         $token = $request->bearerToken();
+
+        if (!$token) {
+            throw new AuthenticationException("Unauthorized");
+        }
+
 
         try {
 
@@ -33,7 +43,7 @@ class JwtMiddleware
             $user = User::find($uuid);
 
 
-            $jwt_token = JwtToken::where('user_id', $user->id)
+            $jwt_token = JwtToken::where('user_id', $user?->id)
                 ->where('token_title', 'access_token')
                 ->first();
 
@@ -42,7 +52,7 @@ class JwtMiddleware
             }
 
 
-            if ($jwt_token->expired_at->lt(now())){
+            if ($jwt_token->expired_at  && $jwt_token->expired_at->lt(now())){
                 $jwt_token->delete();
                 throw new AuthenticationException("Unauthorized");
             }
