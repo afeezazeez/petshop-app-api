@@ -73,4 +73,14 @@ class UserRepository implements IUserRepository
         return $users;
     }
 
+    /**
+     * update user
+     */
+    public function updateUser(string $uuid,array $data):User
+    {
+        $user = User::where('uuid',$uuid)->firstorfail();
+        $user->update($data);
+        return $user;
+    }
+
 }

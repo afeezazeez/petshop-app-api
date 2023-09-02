@@ -27,6 +27,7 @@ Route::group(['namespace' => 'Api', 'prefix' => 'v1'], function (): void {
 
             Route::get('logout',[AuthController::class,'destroy']);
             Route::get('user-listing',[AdminUserController::class,'index']);
+            Route::put('user-edit/{uuid}',[AdminUserController::class,'update']);
 
         });
 

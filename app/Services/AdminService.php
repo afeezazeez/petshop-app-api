@@ -29,7 +29,7 @@ class AdminService
 
 
     /**
-     * Login user with password
+     * Create admin
      *
      * @param array<string,mixed> $request
      * @return array<string,mixed>
@@ -53,4 +53,19 @@ class AdminService
 
         return $data;
     }
+
+    /**
+     * Create admin
+     *
+     * @param array<string,mixed> $request
+     */
+    public function updateUser(string $uuid,array $request): User
+    {
+        $data = array_diff_key($request, array_flip(['password', 'password_confirmation']));
+        return $this->userRepository->updateUser($uuid,$data);
+
+    }
+
+
+
 }

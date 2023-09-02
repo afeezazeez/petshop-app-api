@@ -18,4 +18,12 @@ interface IUserRepository
      */
     public function fetchUsers(): array;
 
+    /**
+     * @param array<string,mixed> $data
+     */
+    public function updateUser(string $uuid, array $data): User;
+
+
+
+
 }

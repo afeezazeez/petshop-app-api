@@ -24,7 +24,7 @@ trait JwtTokenHelper
             'aud' => config('app.url'),
             'iat' => time(),
             'exp' => time() + 3600,
-            'user_uuid' => $user?->id
+            'user_uuid' => $user?->uuid
         ];
         if (!$privateKey){
             throw new ClientErrorException("Error encountered while fetching private key");

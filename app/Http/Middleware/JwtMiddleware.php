@@ -40,7 +40,7 @@ class JwtMiddleware
         try {
 
             $uuid = $this->decodeToken($token);
-            $user = User::find($uuid);
+            $user = User::where('uuid',$uuid)->first();
 
 
             $jwt_token = JwtToken::where('user_id', $user?->id)
