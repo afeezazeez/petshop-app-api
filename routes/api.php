@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Admin\AdminUserController;
 use App\Http\Controllers\Api\Admin\AuthController;
+use App\Http\Controllers\Api\User\UserAuthController;
 use App\Http\Controllers\Api\User\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,8 +36,14 @@ Route::group(['namespace' => 'Api', 'prefix' => 'v1'], function (): void {
     });
 
     Route::group(['prefix' => 'user'], function (): void {
-
+        Route::post('login',[UserAuthController::class,'store']);
         Route::post('create',[UserController::class,'store']);
+
+        Route::middleware(['jwt'])->group(function () {
+
+            Route::get('logout',[UserAuthController::class,'destroy']);
+
+        });
 
     });
 

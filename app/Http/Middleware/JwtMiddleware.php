@@ -59,19 +59,16 @@ class JwtMiddleware
 
             $uri = $request->getPathInfo();
 
-            if (str_starts_with($uri, 'api/v1/admin')) {
-                // This is an admin route
+            if (str_contains($uri, 'api/v1/admin')) {
                 if (!$user->is_admin) {
                     throw new UnauthorizedHttpException("Unauthorized");
                 }
-            } elseif (str_starts_with($uri, 'api/v1/user')) {
-
+            } elseif (str_contains($uri, 'api/v1/user')) {
                 // This is a user route
                 if ($user->is_admin) {
                     throw new UnauthorizedHttpException("Unauthorized");
                 }
             }
-
         } catch (\Exception $e) {
 
             throw new UnauthorizedHttpException("Unauthorized");
