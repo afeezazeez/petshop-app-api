@@ -37,13 +37,9 @@ class JwtToken extends Model
 
         static::creating(function ($model) {
             $model->expired_at = Carbon::now()->addMinutes(10);
-            $model->unique_id = $model->generateHashToken(6);
+            $model->unique_id = generateHashToken(config('app.token_length'));
         });
     }
 
 
-    public function generateHashToken(int $length): string
-    {
-        return  hash('sha256', Str::random($length));
-    }
 }

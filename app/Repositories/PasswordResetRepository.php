@@ -31,7 +31,7 @@ class PasswordResetRepository implements IPasswordResetRepository
      *
      * @param string $email
      */
-    public function getByEmail(string $email): PasswordReset
+    public function getByEmail(string $email): PasswordReset|null
     {
         return  $this->model->where('email',$email)->first();
     }

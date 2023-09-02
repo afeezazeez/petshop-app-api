@@ -41,6 +41,7 @@ Route::group(['namespace' => 'Api', 'prefix' => 'v1'], function (): void {
         Route::post('login',[UserAuthController::class,'store']);
         Route::post('create',[UserController::class,'store']);
         Route::post('forgot-password',[PasswordResetController::class,'store']);
+        Route::post('reset-password-token',[PasswordResetController::class,'update']);
 
         Route::middleware(['jwt'])->group(function () {
             Route::get('',[UserController::class,'show']);
