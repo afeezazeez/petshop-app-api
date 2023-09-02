@@ -22,9 +22,10 @@ class UserRepository implements IUserRepository
      * @param string $email
      * @return User|null
      */
-    public function findByEmail(string $email): User|null
+    public function findAdminByEmail(string $email): User|null
     {
-        return $this->model->where('email', $email)->first();
+        return $this->model->where('email', $email)
+            ->where('is_admin',1)->first();
     }
 
 

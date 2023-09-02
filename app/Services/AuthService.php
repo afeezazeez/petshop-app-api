@@ -4,9 +4,13 @@ namespace App\Services;
 
 use App\Exceptions\ClientErrorException;
 use App\Interfaces\IUserRepository;
+use App\Traits\JwtTokenHelper;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Support\Facades\Auth;
 
 class AuthService
 {
+    use JwtTokenHelper;
 
     private IUserRepository $userRepository;
 
@@ -18,19 +22,30 @@ class AuthService
     /**
      * Login user with password
      *
-     * @param array $request
-     * @return array
+     * @param array<string,mixed> $request
+     * @return array<string, mixed>
      * @throws ClientErrorException
+     * @throws AuthenticationException
      */
     public function login(array $request): array
     {
-        $user = $this->userRepository->findByEmail($request['email']);
+        $user = $this->userRepository->findAdminByEmail($request['email']);
 
-        if (!password_verify($request['password'], $user->password)) {
+        if (!$user || !is_string($user->password) || !password_verify($request['password'], $user->password)) {
             throw new ClientErrorException('Incorrect password!');
         }
 
-        return  [];
+        if (Auth::attempt($request)) {
+            $user = Auth::user();
+            $token = $this->generateToken($user);
+            return [
+                'token' => $token
+            ];
+        }
+        else {
+           throw new AuthenticationException("Unauthorized");
+        }
+
     }
 
 }
