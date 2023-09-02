@@ -27,6 +27,10 @@ class LoginRequest extends FormRequest
         ];
     }
 
+    /**
+     * Messages
+     *@return array<string, mixed>
+     */
     public function messages(): array
     {
         return [

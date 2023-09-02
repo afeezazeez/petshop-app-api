@@ -42,7 +42,7 @@ class JwtToken extends Model
     }
 
 
-    public function generateHashToken(int $length): array|string|null
+    public function generateHashToken(int $length): string
     {
         return  hash('sha256', Str::random($length));
     }
