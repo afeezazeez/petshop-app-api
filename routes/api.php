@@ -40,7 +40,7 @@ Route::group(['namespace' => 'Api', 'prefix' => 'v1'], function (): void {
         Route::post('create',[UserController::class,'store']);
 
         Route::middleware(['jwt'])->group(function () {
-
+            Route::get('',[UserController::class,'show']);
             Route::get('logout',[UserAuthController::class,'destroy']);
 
         });

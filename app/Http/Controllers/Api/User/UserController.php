@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\AddUserRequest;
+use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -16,6 +18,26 @@ class UserController extends Controller
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
+    }
+
+
+    /**
+     * @OA\GET (
+     *     path="/api/v1/user",
+     *     tags={"User Api Endpoints"},
+     *     security={{"bearerAuth":{}}},
+     *     summary="View a User Account",
+     *     @OA\Response(response=200,description="OK"),
+     *     @OA\Response(response=401,description="Unauthorized"),
+     *     @OA\Response(response=404,description="Page not found"),
+     *     @OA\Response(response=422,description="Unprocessable Entity"),
+     *     @OA\Response(response=500,description="Internal server error")
+     *
+     * )
+     */
+    public function show(): JsonResponse
+    {
+        return successResponse(auth()->user());
     }
 
 
