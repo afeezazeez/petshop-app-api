@@ -13,6 +13,16 @@ class OrderStatusSeeder extends Seeder
      */
     public function run(): void
     {
-        OrderStatus::factory(10)->create();
+        $order_statuses = [
+            'open',
+            'pending payment',
+            'paid',
+            'shipped',
+            'cancelled'
+        ];
+
+        foreach ($order_statuses as $order_status){
+            OrderStatus::create(['title' => $order_status]);
+        }
     }
 }
