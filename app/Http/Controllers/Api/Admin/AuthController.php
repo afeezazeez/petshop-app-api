@@ -22,7 +22,7 @@ class AuthController extends Controller
      * @OA\POST(
      *     path="/api/v1/admin/login",
      *     tags={"Admin Api Endpoints"},
-     *     summary="Login",
+     *     summary="Login admin account",
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\MediaType(
@@ -56,7 +56,7 @@ class AuthController extends Controller
      *     path="/api/v1/admin/logout",
      *     tags={"Admin Api Endpoints"},
      *     security={{"bearerAuth":{}}},
-     *     summary="Logout",
+     *     summary="Logout admin account",
      *     @OA\Response(response=200,description="OK"),
      *     @OA\Response(response=401,description="Unauthorized"),
      *     @OA\Response(response=404,description="Page not found"),

@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Interfaces\IUserRepository;
 use App\Models\User;
+use Illuminate\Support\Arr;
+
 
 class UserRepository implements IUserRepository
 {
@@ -28,5 +30,17 @@ class UserRepository implements IUserRepository
             ->where('is_admin',1)->first();
     }
 
+    /**
+     * Create admin
+     * @param array<string,mixed> $data
+     * @return User
+     */
+
+
+    public function createAdmin(array $data): User
+    {
+        $data = Arr::add($data, 'is_admin', 1);
+        return $this->model->create($data);
+    }
 
 }
