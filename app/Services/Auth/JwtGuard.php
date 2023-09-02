@@ -3,6 +3,7 @@
 namespace App\Services\Auth;
 
 use App\Exceptions\ClientErrorException;
+use App\Models\User;
 use Firebase\JWT\Key;
 use Illuminate\Auth\GuardHelpers;
 use Illuminate\Contracts\Auth\Guard;
@@ -41,8 +42,10 @@ class JwtGuard implements Guard
             }
 
             $decoded = JWT::decode($token, new Key($publicKey, 'RS256'));
-
-            $this->user = $this->provider->retrieveById($decoded->user_uuid);
+            $user = User::where('uuid',($decoded->user_uuid))->first();
+            if ($user){
+                $this->user = $this->provider->retrieveById($user->id);
+            }
 
         } catch (\Exception $e) {
             return null;
