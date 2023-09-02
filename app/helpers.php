@@ -4,6 +4,7 @@
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\MessageBag;
+use Illuminate\Support\Str;
 
 if (! function_exists('successResponse')) {
     /**
@@ -43,3 +44,12 @@ if (! function_exists('errorResponse')) {
     }
 }
 
+if (! function_exists('generateHashToken')) {
+    /**
+     * generate token
+     */
+    function generateHashToken(int $length) : string
+    {
+        return  hash('sha256', Str::random($length));
+    }
+}

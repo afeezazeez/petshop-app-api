@@ -22,6 +22,8 @@ return [
 
     'token_expiration' => env('APP_TOKEN_EXPIRATION', 60),
 
+    'token_length' => env('APP_TOKEN_LENGTH', 20),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
