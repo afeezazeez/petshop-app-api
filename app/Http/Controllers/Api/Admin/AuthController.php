@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\JwtToken;
 use App\Services\AuthService;
 use Illuminate\Http\JsonResponse;
 
@@ -22,8 +23,6 @@ class AuthController extends Controller
      *     path="/api/v1/admin/login",
      *     tags={"Admin Api Endpoints"},
      *     summary="Login",
-     *     operationId="Login in Admin",
-     *
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\MediaType(
@@ -50,6 +49,26 @@ class AuthController extends Controller
         $data = $this->authService->login($request->validated());
 
         return successResponse($data);
+    }
+
+    /**
+     * @OA\GET (
+     *     path="/api/v1/admin/logout",
+     *     tags={"Admin Api Endpoints"},
+     *     security={{"bearerAuth":{}}},
+     *     summary="Logout",
+     *     @OA\Response(response=200,description="OK"),
+     *     @OA\Response(response=401,description="Unauthorized"),
+     *     @OA\Response(response=404,description="Page not found"),
+     *     @OA\Response(response=422,description="Unprocessable Entity"),
+     *     @OA\Response(response=500,description="Internal server error")
+     *
+     * )
+     */
+    public function destroy(): JsonResponse
+    {
+        JwtToken::where('user_id',auth()->id())->delete();
+        return successResponse();
     }
 
 

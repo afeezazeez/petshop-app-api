@@ -11,6 +11,7 @@ use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -54,6 +55,10 @@ class Handler extends ExceptionHandler
             return errorResponse('Failed validation',[],$e->validator->errors(),[],Response::HTTP_UNPROCESSABLE_ENTITY);
         }
         elseif ($e instanceof AuthenticationException) {
+            return errorResponse('Unauthorized',[],null, [],Response::HTTP_UNAUTHORIZED);
+        }
+
+        elseif ($e instanceof UnauthorizedHttpException) {
             return errorResponse('Unauthorized',[],null, [],Response::HTTP_UNAUTHORIZED);
         }
 

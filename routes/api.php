@@ -18,6 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'Api', 'prefix' => 'v1'], function (): void {
 
     Route::group(['prefix' => 'admin'], function (): void {
-      Route::post('login',[AuthController::class,'store']);
+
+        Route::post('login',[AuthController::class,'store']);
+
+        Route::middleware(['jwt'])->group(function () {
+
+            Route::get('logout',[AuthController::class,'destroy']);
+
+        });
+
     });
+
 });
