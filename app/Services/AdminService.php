@@ -17,6 +17,18 @@ class AdminService
     }
 
     /**
+     * fetch users
+     *
+     * @return array<string,mixed>
+     */
+    public function fetchUsers(): array
+    {
+        return $this->userRepository->fetchUsers();
+    }
+
+
+
+    /**
      * Login user with password
      *
      * @param array<string,mixed> $request

@@ -26,6 +26,7 @@ Route::group(['namespace' => 'Api', 'prefix' => 'v1'], function (): void {
         Route::middleware(['jwt'])->group(function () {
 
             Route::get('logout',[AuthController::class,'destroy']);
+            Route::get('user-listing',[AdminUserController::class,'index']);
 
         });
 

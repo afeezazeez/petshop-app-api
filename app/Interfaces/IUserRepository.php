@@ -13,4 +13,9 @@ interface IUserRepository
      */
     public function createAdmin(array $data): User;
 
+    /**
+     * @return  array<string,mixed>
+     */
+    public function fetchUsers(): array;
+
 }

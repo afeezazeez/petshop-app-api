@@ -18,6 +18,10 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'default_pagination' => env('APP_DEFAULT_PAGINATION', 10),
+
+    'token_expiration' => env('APP_TOKEN_EXPIRATION', 60),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

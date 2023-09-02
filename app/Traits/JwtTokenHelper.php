@@ -23,7 +23,7 @@ trait JwtTokenHelper
             'iss' => config('app.url'),
             'aud' => config('app.url'),
             'iat' => time(),
-            'exp' => time() + 600,
+            'exp' => time() + 3600,
             'user_uuid' => $user?->id
         ];
         if (!$privateKey){

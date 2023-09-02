@@ -37,6 +37,10 @@ class AuthService
 
         if (Auth::attempt($request)) {
             $user = Auth::user();
+            if ($user !== null) {
+                $user->update(['last_login_at' => now()]);
+            }
+
             $token = $this->generateToken($user);
             return [
                 'token' => $token
