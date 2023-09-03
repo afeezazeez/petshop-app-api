@@ -44,7 +44,7 @@ class UserControllerTest extends TestCase
 
 
     /**
-     * An admin who is logged in can create admin
+     * A user can create account
      */
     public function test_user_can_create_account(): void
     {

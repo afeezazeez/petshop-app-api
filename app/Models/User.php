@@ -6,6 +6,7 @@ use App\Traits\UUID;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
@@ -66,6 +67,15 @@ class User extends Authenticatable
     public function password(): Attribute
     {
         return Attribute::set(fn($value) => Hash::make($value));
+    }
+
+    /**
+     * @return HasMany<Order, User>
+     *
+     */
+    public function orders(): HasMany
+    {
+        return $this->HasMany(Order::class);
     }
 
 
