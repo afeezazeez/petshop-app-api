@@ -4,8 +4,47 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f26504d5f9a87a9b1632f5127deefe0c",
+    "content-hash": "db6457ec6719612cb0a91adbd5b28e16",
     "packages": [
+        {
+            "name": "afeezazeez/converter",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./package/afeezazeez/converter",
+                "reference": "d243809699012fc033bda0649685a57281df2adc"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Afeezazeez\\Converter\\Providers\\ConverterServiceProvider"
+                    ],
+                    "aliases": {
+                        "ExchangeConverter": "Afeezazeez\\Converter\\Facades\\ConverterFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Afeezazeez\\Converter\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Afeez Azeez",
+                    "email": "azeezafeez212@gmail.com"
+                }
+            ],
+            "description": "This package empowers international users by enabling them to effortlessly determine the price of individual products or calculate the total cart amount in their preferred currency, offering a seamless shopping experience tailored to their currency preferences",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
         {
             "name": "brick/math",
             "version": "0.11.0",
@@ -11002,7 +11041,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "afeezazeez/converter": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

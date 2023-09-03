@@ -11,7 +11,8 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
-        "laravel/tinker": "^2.8"
+        "laravel/tinker": "^2.8",
+        "afeezazeez/converter": "dev-master"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.13",
@@ -72,5 +73,14 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": {
+        "afeezazeez/converter": {
+            "type": "path",
+            "url": "./package/afeezazeez/converter",
+            "options": {
+                "symlink": true
+            }
+        }
+    }
 }
