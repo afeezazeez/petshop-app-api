@@ -49,14 +49,15 @@ $ git clone *remote repository url*
 
 
 
-You should be able to visit your app at your laravel app base url e.g http://localhost:8000/api/v1/auth/login or http://shopping-cart-test.test/api/v1/auth/login (Provided you use Laravel Valet).
-
+You should be able to visit your app at your laravel app base url e.g http://localhost:8000
 ### Testing
 To test, you can login with the default seeded admin credential
 ```
 Email - admin@buckhill.co.uk
 Password - admin
 ```
+
+For users, default password is 'userpassword'. Feel free to grab any user from user listing endpoint and make use of default password to login
 
 ### PHPUNIT
 To run general test, use command
