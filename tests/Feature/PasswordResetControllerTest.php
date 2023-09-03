@@ -33,7 +33,7 @@ class PasswordResetControllerTest extends TestCase
      */
     public function test_user_can_generate_password_reset_token(): void
     {
-        $payload = ['email'=>$this->user->email];
+        $payload = ['email'=>$this->user->email ?? null];
         $response = $this->postJson(route('user.forgot-password'),$payload);
         $response->assertStatus(Response::HTTP_OK);
     }
@@ -43,7 +43,7 @@ class PasswordResetControllerTest extends TestCase
      */
     public function test_user_can_generate_password_reset_token_and_reset_password(): void
     {
-        $payload = ['email'=>$this->user->email];
+        $payload = ['email'=>$this->user->email?? null];
         $response = $this->postJson(route('user.forgot-password'),$payload);
         $response->assertOk();
         $responseContent = $response->getContent();
@@ -52,7 +52,7 @@ class PasswordResetControllerTest extends TestCase
             $token = $responseData['data']['reset_token'];
             $payload = [
                 'token' => $token,
-                'email' => $this->user->email,
+                'email' => $this->user->email ?? null,
                 'password' => 'userpassword',
                 'password_confirmation' => 'userpassword'
             ];

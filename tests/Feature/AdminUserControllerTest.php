@@ -17,7 +17,7 @@ class AdminUserControllerTest extends TestCase
 
     protected User|null $user;
     protected string $token;
-    protected User $normalUser;
+    protected User|null $normalUser;
 
     /**
      * @throws ClientErrorException
@@ -102,7 +102,7 @@ class AdminUserControllerTest extends TestCase
         ];
 
 
-        $response = $this->putJson(route('admin.user.update',['uuid'=>$this->normalUser->uuid]),$userPayload);
+        $response = $this->putJson(route('admin.user.update',['uuid'=>$this->normalUser->uuid ?? null]),$userPayload);
         $response->assertStatus(Response::HTTP_OK);
 
     }

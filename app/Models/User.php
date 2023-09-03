@@ -70,7 +70,7 @@ class User extends Authenticatable
     }
 
     /**
-     * @return HasMany<Order, User>
+     * @return HasMany<Order>
      *
      */
     public function orders(): HasMany
