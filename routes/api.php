@@ -24,13 +24,13 @@ Route::group(['namespace' => 'Api', 'prefix' => 'v1'], function (): void {
     Route::group(['prefix' => 'admin'], function (): void {
 
         Route::post('login',[AuthController::class,'store'])->name('admin.login');
-        Route::post('create',[AdminUserController::class,'store']);
+        Route::post('create',[AdminUserController::class,'store'])->name('admin.user.create');
 
         Route::middleware(['jwt'])->group(function () {
 
             Route::get('logout',[AuthController::class,'destroy']);
-            Route::get('user-listing',[AdminUserController::class,'index']);
-            Route::put('user-edit/{uuid}',[AdminUserController::class,'update']);
+            Route::get('user-listing',[AdminUserController::class,'index'])->name('admin.user.list');
+            Route::put('user-edit/{uuid}',[AdminUserController::class,'update'])->name('admin.user.update');
             Route::delete('user-delete/{uuid}',[AdminUserController::class,'destroy']);
 
         });
@@ -38,7 +38,7 @@ Route::group(['namespace' => 'Api', 'prefix' => 'v1'], function (): void {
     });
 
     Route::group(['prefix' => 'user'], function (): void {
-        Route::post('login',[UserAuthController::class,'store']);
+        Route::post('login',[UserAuthController::class,'store'])->name('user.login');
         Route::post('create',[UserController::class,'store']);
         Route::post('forgot-password',[PasswordResetController::class,'store']);
         Route::post('reset-password-token',[PasswordResetController::class,'update']);
