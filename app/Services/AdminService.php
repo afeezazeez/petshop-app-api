@@ -2,9 +2,11 @@
 
 namespace App\Services;
 
+use App\Exceptions\ClientErrorException;
 use App\Http\Controllers\Api\Admin\AuthController;
 use App\Interfaces\IUserRepository;
 use App\Models\User;
+use Illuminate\Auth\AuthenticationException;
 
 class AdminService
 {
@@ -36,8 +38,13 @@ class AdminService
      */
     public function createAdmin(array $request): array
     {
+
         $user = $this->userRepository->createAdmin($request);
-        $loginAdmin = app(AuthService::class)->login(['email' => $request['email'], 'password' => $request['password']]);
+        try {
+            $loginAdmin = app(AuthService::class)->login(['email' => $request['email'], 'password' => $request['password']],"admin");
+        } catch (AuthenticationException $e) {
+            throw new AuthenticationException('Unauthenticated.');
+        }
 
         return $this->fetch($user, $loginAdmin['token']);
     }

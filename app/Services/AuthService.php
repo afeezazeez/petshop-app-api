@@ -29,6 +29,7 @@ class AuthService
      */
     public function login(array $request, string $user_type = "user"): array
     {
+
         if ($user_type === "admin"){
             $user = $this->userRepository->findAdminByEmail($request['email']);
         }else{
