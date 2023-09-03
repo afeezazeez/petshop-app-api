@@ -6,6 +6,12 @@ PINK=$(tput setaf 5)
 
 if [[ "$1" == "start" ]]; then
 
+     echo "${PINK}Installing composer packages ..."
+        if ! cp .env.example .env; then
+            echo "${PINK}Error: Failed to copy .env.example to .env."
+            exit 1
+        fi
+
     echo "${PINK}Starting Docker containers ..."
     if ! docker-compose up -d; then
         echo "${PINK}Error: Failed to start Docker containers. Make sure Docker is installed and running."
@@ -23,12 +29,6 @@ if [[ "$1" == "start" ]]; then
             openssl genpkey -algorithm RSA -out storage/app/public/keys/private-key.pem && \
             openssl rsa -pubout -in storage/app/public/keys/private-key.pem -out storage/app/public/keys/public-key.pem
 
-
-    echo "${PINK}Installing composer packages ..."
-    if ! cp .env.example .env; then
-        echo "${PINK}Error: Failed to copy .env.example to .env."
-        exit 1
-    fi
 
     if ! composer install --quiet; then
         echo "${PINK}Error: Composer installation failed."
