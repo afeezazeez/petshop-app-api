@@ -1,0 +1,43 @@
+{
+    "name": "afeezazeez/converter",
+    "description": "This package empowers international users by enabling them to effortlessly determine the price of individual products or calculate the total cart amount in their preferred currency, offering a seamless shopping experience tailored to their currency preferences",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "illuminate/support": "~6|~7|~8|~9|^10.0",
+        "guzzlehttp/guzzle": "7.8.x-dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.1",
+        "orchestra/testbench": "dev-develop"
+    },
+    "autoload": {
+        "psr-4": {
+            "Afeezazeez\\Converter\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Afeezazeez\\Converter\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "authors": [
+        {
+            "name": "Afeez Azeez",
+            "email": "azeezafeez212@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Afeezazeez\\Converter\\Providers\\ConverterServiceProvider"
+            ],
+            "aliases": {
+                "ExchangeConverter": "Afeezazeez\\Converter\\Facades\\ConverterFacade"
+            }
+        }
+    }
+}
