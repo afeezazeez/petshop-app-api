@@ -30,9 +30,9 @@ class AuthService
     public function login(array $request, string $user_type = "user"): array
     {
 
-        if ($user_type === "admin"){
+        if ($user_type === "admin") {
             $user = $this->userRepository->findAdminByEmail($request['email']);
-        }else{
+        } else {
             $user = $this->userRepository->findUserByEmail($request['email']);
         }
 
@@ -50,9 +50,8 @@ class AuthService
             return [
                 'token' => $token
             ];
-        }
-        else {
-           throw new AuthenticationException("Unauthorized");
+        } else {
+            throw new AuthenticationException("Unauthorized");
         }
 
     }

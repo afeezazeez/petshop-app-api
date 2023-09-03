@@ -28,8 +28,6 @@ class AdminService
         return $this->userRepository->fetchUsers();
     }
 
-
-
     /**
      * Create admin
      *
@@ -41,7 +39,7 @@ class AdminService
 
         $user = $this->userRepository->createAdmin($request);
         try {
-            $loginAdmin = app(AuthService::class)->login(['email' => $request['email'], 'password' => $request['password']],"admin");
+            $loginAdmin = app(AuthService::class)->login(['email' => $request['email'], 'password' => $request['password']], "admin");
         } catch (AuthenticationException $e) {
             throw new AuthenticationException('Unauthenticated.');
         }
@@ -49,16 +47,15 @@ class AdminService
         return $this->fetch($user, $loginAdmin['token']);
     }
 
-
     /**
      * update user
      *
      * @param array<string,mixed> $request
      */
-    public function updateUser(string $uuid,array $request): User
+    public function updateUser(string $uuid, array $request): User
     {
         $data = array_diff_key($request, array_flip(['password', 'password_confirmation']));
-        return $this->userRepository->updateUser($uuid,$data);
+        return $this->userRepository->updateUser($uuid, $data);
 
     }
 
@@ -66,7 +63,7 @@ class AdminService
      * delete user
      *
      */
-    public function deleteUser(string $uuid):void
+    public function deleteUser(string $uuid): void
     {
         $this->userRepository->deleteUser($uuid);
 
@@ -94,6 +91,5 @@ class AdminService
 
         return $data;
     }
-
 
 }

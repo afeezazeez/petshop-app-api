@@ -19,8 +19,6 @@ class OrderController extends Controller
     }
 
 
-
-
     /**
      * @OA\GET(
      *     path="/api/v1/user/orders",
@@ -52,9 +50,9 @@ class OrderController extends Controller
 
     public function index(): LengthAwarePaginator
     {
-        $page  = request()->page ?? 1;
+        $page = request()->page ?? 1;
         $limit = request()->limit ?? config('app.default_pagination');
-        $orders =   $this->orderService->fetchUserOrders();
+        $orders = $this->orderService->fetchUserOrders();
         $items = collect($orders);
         return new LengthAwarePaginator(
             $items->forPage($page, $limit),

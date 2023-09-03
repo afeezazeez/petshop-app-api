@@ -6,10 +6,8 @@ use App\Models\User;
 
 interface IOrderRepository
 {
-
     /**
      * @return  array<string,mixed>
      */
-    public function fetchUserOrders();//: array;
-
+    public function fetchUserOrders(): array;
 }

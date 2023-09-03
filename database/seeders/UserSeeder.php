@@ -17,10 +17,10 @@ class UserSeeder extends Seeder
 
         User::factory()->create([
             'first_name' => 'Buck',
-            'last_name'  => 'Hill',
+            'last_name' => 'Hill',
             'email' => 'admin@buckhill.co.uk',
             'password' => 'admin',
-            'is_admin'  => 1
+            'is_admin' => 1
         ]);
 
         User::factory(10)->create();

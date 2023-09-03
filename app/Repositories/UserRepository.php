@@ -12,7 +12,6 @@ use Illuminate\Support\Arr;
 
 class UserRepository implements IUserRepository
 {
-
     protected User $model;
     /**
      * @var int|mixed
@@ -26,10 +25,9 @@ class UserRepository implements IUserRepository
     public function __construct(User $model)
     {
         $this->model = $model;
-        $this->page  = request()->page ?? 1;
+        $this->page = request()->page ?? 1;
         $this->limit = request()->limit ?? config('app.default_pagination');
     }
-
 
     /**
      * Find admin by email
@@ -40,7 +38,7 @@ class UserRepository implements IUserRepository
     public function findAdminByEmail(string $email): User|null
     {
         return $this->model->where('email', $email)
-            ->where('is_admin',1)->first();
+            ->where('is_admin', 1)->first();
     }
 
     /**
@@ -52,10 +50,8 @@ class UserRepository implements IUserRepository
     public function findUserByEmail(string $email): User|null
     {
         return $this->model->where('email', $email)
-            ->where('is_admin',0)->first();
+            ->where('is_admin', 0)->first();
     }
-
-
 
     /**
      * Create admin
@@ -81,28 +77,28 @@ class UserRepository implements IUserRepository
 
     /**
      * fetch users
-     *@return array<string, mixed>
+     * @return array<string, mixed>
      */
-    public function fetchUsers():array
+    public function fetchUsers(): array
     {
         $query = User::query();
         $users = app(Pipeline::class)
-                ->send($query)
-                ->through([ModelsFilter::class])
-                ->via('process')
-                ->thenReturn()
-                ->where('is_admin',0)
-                ->paginate($this->limit,['*'],'page',$this->page)
-                ->toArray();
+            ->send($query)
+            ->through([ModelsFilter::class])
+            ->via('process')
+            ->thenReturn()
+            ->where('is_admin', 0)
+            ->paginate($this->limit, ['*'], 'page', $this->page)
+            ->toArray();
         return $users;
     }
 
     /**
      * update user
      */
-    public function updateUser(string $uuid,array $data):User
+    public function updateUser(string $uuid, array $data): User
     {
-        $user = User::where('uuid',$uuid)->firstorfail();
+        $user = User::where('uuid', $uuid)->firstorfail();
         $user->update($data);
         return $user;
     }
@@ -114,34 +110,28 @@ class UserRepository implements IUserRepository
     public function updateUserAccount(array $data): User|null
     {
         $user = auth()->user();
-        if ($user){
+        if ($user) {
             $user->update($data);
         }
         return $user;
     }
 
-
     /**
      * delete user
      */
-    public function deleteUser(string $uuid):void
+    public function deleteUser(string $uuid): void
     {
-       User::where('uuid',$uuid)->delete();
+        User::where('uuid', $uuid)->delete();
 
     }
 
     /**
      * delete authenticated user account
      */
-    public function deleteAuthUser():void
+    public function deleteAuthUser(): void
     {
-        if (auth()->user()){
+        if (auth()->user()) {
             auth()->user()->delete();
         }
     }
-
-
-
-
-
 }

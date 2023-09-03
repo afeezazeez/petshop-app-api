@@ -12,7 +12,7 @@ use Tests\TestCase;
 
 class AuthControllerTest extends TestCase
 {
-    use JwtTokenHelper,RefreshDatabase;
+    use JwtTokenHelper, RefreshDatabase;
 
     protected User|null $user;
 
@@ -20,7 +20,7 @@ class AuthControllerTest extends TestCase
     {
         parent::setUp();
         $this->seed(UserSeeder::class);
-        $this->user = User::where('is_admin',1)->first() ?? null;
+        $this->user = User::where('is_admin', 1)->first() ?? null;
 
     }
 
@@ -33,7 +33,7 @@ class AuthControllerTest extends TestCase
             'email' => $this->user->email ?? null,
             'password' => 'admin'
         ];
-        $response = $this->postJson(route('admin.login'),$data);
+        $response = $this->postJson(route('admin.login'), $data);
         $response->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure([
                 'success',
@@ -55,7 +55,7 @@ class AuthControllerTest extends TestCase
             'email' => $this->user->email ?? null,
             'password' => 'adminefefefef'
         ];
-        $response = $this->postJson(route('admin.login'),$data);
+        $response = $this->postJson(route('admin.login'), $data);
         $response->assertStatus(Response::HTTP_BAD_REQUEST);
         $responseContent = $response->getContent();
         if (is_string($responseContent) && is_array(json_decode($responseContent, true)) && json_last_error() === JSON_ERROR_NONE) {
@@ -82,7 +82,7 @@ class AuthControllerTest extends TestCase
             'email' => 'xyudd@dd.com',
             'password' => 'adminefefefef'
         ];
-        $response = $this->postJson(route('admin.login'),$data);
+        $response = $this->postJson(route('admin.login'), $data);
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson([
                 "success" => 0,

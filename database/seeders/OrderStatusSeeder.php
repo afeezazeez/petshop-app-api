@@ -21,7 +21,7 @@ class OrderStatusSeeder extends Seeder
             'cancelled'
         ];
 
-        foreach ($order_statuses as $order_status){
+        foreach ($order_statuses as $order_status) {
             OrderStatus::create(['title' => $order_status]);
         }
     }

@@ -9,13 +9,11 @@ class PasswordResetService
 {
     private IPasswordResetRepository $passwordResetRepository;
 
-
     public function __construct(IPasswordResetRepository $passwordResetRepository)
     {
         $this->passwordResetRepository = $passwordResetRepository;
 
     }
-
 
     /**
      * Create token
@@ -27,9 +25,9 @@ class PasswordResetService
         $existingToken = $this->passwordResetRepository->getByEmail($email);
 
         if ($existingToken) {
-           $this->passwordResetRepository->deleteToken($existingToken);
+            $this->passwordResetRepository->deleteToken($existingToken);
         }
-       return $this->passwordResetRepository->createToken($email);
+        return $this->passwordResetRepository->createToken($email);
 
     }
 
@@ -47,8 +45,5 @@ class PasswordResetService
         }
 
     }
-
-
-
 
 }

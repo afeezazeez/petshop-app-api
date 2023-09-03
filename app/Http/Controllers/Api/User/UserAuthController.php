@@ -67,7 +67,7 @@ class UserAuthController extends Controller
      */
     public function destroy(): JsonResponse
     {
-        JwtToken::where('user_id',auth()->id())->delete();
+        JwtToken::where('user_id', auth()->id())->delete();
         return successResponse();
     }
 

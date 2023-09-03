@@ -46,7 +46,7 @@ class AuthController extends Controller
 
     public function store(LoginRequest $request): JsonResponse
     {
-        $data = $this->authService->login($request->validated(),"admin");
+        $data = $this->authService->login($request->validated(), "admin");
 
         return successResponse($data);
     }
@@ -67,7 +67,7 @@ class AuthController extends Controller
      */
     public function destroy(): JsonResponse
     {
-        JwtToken::where('user_id',auth()->id())->delete();
+        JwtToken::where('user_id', auth()->id())->delete();
         return successResponse();
     }
 

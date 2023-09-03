@@ -13,7 +13,7 @@ use Tests\TestCase;
 
 class AdminUserControllerTest extends TestCase
 {
-    use JwtTokenHelper,RefreshDatabase;
+    use JwtTokenHelper, RefreshDatabase;
 
     protected User|null $user;
     protected string $token;
@@ -26,8 +26,8 @@ class AdminUserControllerTest extends TestCase
     {
         parent::setUp();
         $this->seed(UserSeeder::class);
-        $this->user = User::where('is_admin',1)->first() ?? null;
-        $this->normalUser = User::where('is_admin',0)->first() ?? null;
+        $this->user = User::where('is_admin', 1)->first() ?? null;
+        $this->normalUser = User::where('is_admin', 0)->first() ?? null;
         $this->token = $this->generateToken($this->user);
 
     }
@@ -77,7 +77,7 @@ class AdminUserControllerTest extends TestCase
         ];
 
 
-        $response = $this->postJson(route('admin.user.create'),$userPayload);
+        $response = $this->postJson(route('admin.user.create'), $userPayload);
         $response->assertStatus(Response::HTTP_OK);
 
     }
@@ -102,7 +102,7 @@ class AdminUserControllerTest extends TestCase
         ];
 
 
-        $response = $this->putJson(route('admin.user.update',['uuid'=>$this->normalUser->uuid ?? null]),$userPayload);
+        $response = $this->putJson(route('admin.user.update', ['uuid' => $this->normalUser->uuid ?? null]), $userPayload);
         $response->assertStatus(Response::HTTP_OK);
 
     }

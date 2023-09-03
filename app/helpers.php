@@ -6,50 +6,49 @@ use Illuminate\Http\Response;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
 
-if (! function_exists('successResponse')) {
+if (!function_exists('successResponse')) {
     /**
      * Return a standard success json response
      *
      */
-    function successResponse(mixed $data = [], int $code = Response::HTTP_OK) : JsonResponse
+    function successResponse(mixed $data = [], int $code = Response::HTTP_OK): JsonResponse
     {
         return response()->json([
             'success' => 1,
-            'data'    => $data,
-            'error'   => null,
-            'errors'  => [],
-            'extra'   => []
+            'data' => $data,
+            'error' => null,
+            'errors' => [],
+            'extra' => [],
         ], $code);
     }
 }
 
-
-if (! function_exists('errorResponse')) {
+if (!function_exists('errorResponse')) {
     /**
      * Return a standard error json response
      * @param array<string, mixed>[] $data
      * @param array<string, mixed>[] $trace
      */
-    function errorResponse(string $error = null, array $data = [], MessageBag $errors = null, array $trace = [],  int $code = Response::HTTP_BAD_REQUEST) : JsonResponse
+    function errorResponse(string $error = null, array $data = [], MessageBag $errors = null, array $trace = [],
+                           int $code = Response::HTTP_BAD_REQUEST): JsonResponse
     {
         return response()->json([
             'success' => 0,
-            'data'    => $data,
-            'error'   => $error,
-            'errors'  => $errors ?? [],
-            'trace'   => $trace
+            'data' => $data,
+            'error' => $error,
+            'errors' => $errors ?? [],
+            'trace' => $trace,
         ], $code);
-
 
     }
 }
 
-if (! function_exists('generateHashToken')) {
+if (!function_exists('generateHashToken')) {
     /**
      * generate token
      */
-    function generateHashToken(int $length) : string
+    function generateHashToken(int $length): string
     {
-        return  hash('sha256', Str::random($length));
+        return hash('sha256', Str::random($length));
     }
 }

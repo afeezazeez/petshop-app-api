@@ -20,29 +20,22 @@ class JwtMiddleware
     /**
      * @throws AuthenticationException
      */
-    public function handle(Request$request, Closure $next): Response|JsonResponse
+    public function handle(Request $request, Closure $next): Response|JsonResponse
 
     {
         // Check for the presence of the Authorization header
         if (!$request->hasHeader('Authorization')) {
             throw new AuthenticationException("Unauthorized");
         }
-
-
-
         $token = $request->bearerToken();
 
         if (!$token) {
             throw new AuthenticationException("Unauthorized");
         }
 
-
         try {
-
             $uuid = $this->decodeToken($token);
-            $user = User::where('uuid',$uuid)->first();
-
-
+            $user = User::where('uuid', $uuid)->first();
             $jwt_token = JwtToken::where('user_id', $user?->id)
                 ->where('token_title', 'access_token')
                 ->first();
@@ -50,13 +43,10 @@ class JwtMiddleware
             if (!$user || !$jwt_token) {
                 throw new AuthenticationException("Unauthorized");
             }
-
-
-            if ($jwt_token->expired_at  && $jwt_token->expired_at->lt(now())){
+            if ($jwt_token->expired_at && $jwt_token->expired_at->lt(now())) {
                 $jwt_token->delete();
                 throw new AuthenticationException("Unauthorized");
             }
-
             $uri = $request->getPathInfo();
 
             if (str_contains($uri, 'api/v1/admin')) {
@@ -70,12 +60,9 @@ class JwtMiddleware
                 }
             }
         } catch (\Exception $e) {
-
             throw new UnauthorizedHttpException("Unauthorized");
-
         }
 
         return $next($request);
-
     }
 }

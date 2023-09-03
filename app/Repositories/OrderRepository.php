@@ -19,7 +19,6 @@ class OrderRepository implements IOrderRepository
 
     }
 
-
     /**
      * Fetch user orders
      *
@@ -33,11 +32,11 @@ class OrderRepository implements IOrderRepository
             ->through([ModelsFilter::class])
             ->via('process')
             ->thenReturn()
-            ->with(['order_status','user','payment'])
-            ->where('user_id',auth()->id())
+            ->with(['order_status', 'user', 'payment'])
+            ->where('user_id', auth()->id())
             ->get();
 
-       return OrderResource::collection($orders)->resolve();
+        return OrderResource::collection($orders)->resolve();
 
     }
 

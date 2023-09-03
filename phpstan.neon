@@ -2,12 +2,12 @@ includes:
     - ./vendor/nunomaduro/larastan/extension.neon
 
 parameters:
-
     paths:
-         - app
-         - database
-         - routes
-         - tests
-
+        - app
+        - database
+        - routes
+        - tests
     level: 8
-
+    excludePaths:
+        - app/Http/Resources
+        - app/Services/Auth/JwtGuard

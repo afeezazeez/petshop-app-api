@@ -11,27 +11,27 @@ class ModelsFilter
 {
     /**
      *
-     *@param  Builder<Order> $query
+     * @param Builder<Order> $query
      * @return Builder<Order>
      */
-    public function process(Builder $query, Closure $next):Builder
+    public function process(Builder $query, Closure $next): Builder
     {
         $sortBy = request()->sortBy ?? 'created_at';
         $desc = request()->desc ?? false;
         $query->orderBy($sortBy, $desc == "true" ? 'desc' : 'asc');
-        if (request()->has('first_name')){
+        if (request()->has('first_name')) {
             $query->where('first_name', 'LIKE', '%' . request('first_name') . '%');
         }
-        if (request()->has('email')){
+        if (request()->has('email')) {
             $query->where('email', request('email'));
         }
-        if (request()->has('phone')){
+        if (request()->has('phone')) {
             $query->where('phone_number', request('phone'));
         }
-        if (request()->has('address')){
-            $query->where('address', 'LIKE','%' . request('address') . '%');
+        if (request()->has('address')) {
+            $query->where('address', 'LIKE', '%' . request('address') . '%');
         }
-        if (request()->has('created_at')){
+        if (request()->has('created_at')) {
             $query->whereDate('created_at', request('created_at'));
         }
         return $next($query);

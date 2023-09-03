@@ -60,7 +60,7 @@ class UserService
      * delete user
      *
      */
-    public function deleteUser():void
+    public function deleteUser(): void
     {
         $this->userRepository->deleteAuthUser();
 

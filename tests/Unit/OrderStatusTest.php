@@ -22,7 +22,7 @@ class OrderStatusTest extends TestCase
     public function testOrderStatusCanBeCreated(): void
     {
 
-        $order_status = OrderStatus::create(['title'=>'shipped']);
+        $order_status = OrderStatus::create(['title' => 'shipped']);
 
         $this->assertDatabaseHas('order_statuses', [
             'title' => 'shipped'

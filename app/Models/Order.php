@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Order extends Model
 {
-    use HasFactory,UUID;
+    use HasFactory, UUID;
 
     /**
      * The attributes that are mass assignable.
@@ -31,7 +31,7 @@ class Order extends Model
 
     protected $casts = [
         'products' => 'json',
-        'address'  => 'json'
+        'address' => 'json'
     ];
 
     /**

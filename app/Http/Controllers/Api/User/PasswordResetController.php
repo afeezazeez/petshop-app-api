@@ -50,7 +50,7 @@ class PasswordResetController extends Controller
     {
         $data = $this->passwordResetService->createToken($request->email);
 
-        return successResponse(['reset_token'=>$data]);
+        return successResponse(['reset_token' => $data]);
     }
 
     /**
@@ -86,6 +86,6 @@ class PasswordResetController extends Controller
     {
         $this->passwordResetService->resetPassword($request->email);
 
-        return successResponse(['message'=>'Password has been successfully updated']);
+        return successResponse(['message' => 'Password has been successfully updated']);
     }
 }

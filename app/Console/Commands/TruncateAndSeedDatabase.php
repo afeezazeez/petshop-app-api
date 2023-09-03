@@ -24,7 +24,7 @@ class TruncateAndSeedDatabase extends Command
     /**
      * Execute the console command.
      */
-    public function handle():void
+    public function handle(): void
     {
         Artisan::call('migrate:fresh --seed');
     }

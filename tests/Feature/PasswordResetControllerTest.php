@@ -23,7 +23,7 @@ class PasswordResetControllerTest extends TestCase
     {
         parent::setUp();
         $this->seed(UserSeeder::class);
-        $this->user = User::where('is_admin',0)->first() ?? null;
+        $this->user = User::where('is_admin', 0)->first() ?? null;
 
     }
 
@@ -33,8 +33,8 @@ class PasswordResetControllerTest extends TestCase
      */
     public function test_user_can_generate_password_reset_token(): void
     {
-        $payload = ['email'=>$this->user->email ?? null];
-        $response = $this->postJson(route('user.forgot-password'),$payload);
+        $payload = ['email' => $this->user->email ?? null];
+        $response = $this->postJson(route('user.forgot-password'), $payload);
         $response->assertStatus(Response::HTTP_OK);
     }
 
@@ -43,8 +43,8 @@ class PasswordResetControllerTest extends TestCase
      */
     public function test_user_can_generate_password_reset_token_and_reset_password(): void
     {
-        $payload = ['email'=>$this->user->email?? null];
-        $response = $this->postJson(route('user.forgot-password'),$payload);
+        $payload = ['email' => $this->user->email ?? null];
+        $response = $this->postJson(route('user.forgot-password'), $payload);
         $response->assertOk();
         $responseContent = $response->getContent();
         if (is_string($responseContent) && is_array(json_decode($responseContent, true)) && json_last_error() === JSON_ERROR_NONE) {
@@ -56,7 +56,7 @@ class PasswordResetControllerTest extends TestCase
                 'password' => 'userpassword',
                 'password_confirmation' => 'userpassword'
             ];
-            $resetRequest = $this->postJson(route('user.password-reset'),$payload);
+            $resetRequest = $this->postJson(route('user.password-reset'), $payload);
             $resetRequest->assertOk();
         }
 

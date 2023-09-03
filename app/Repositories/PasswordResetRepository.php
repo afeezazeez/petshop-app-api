@@ -15,7 +15,6 @@ class PasswordResetRepository implements IPasswordResetRepository
         $this->model = $model;
     }
 
-
     /**
      * Create token
      *
@@ -23,7 +22,7 @@ class PasswordResetRepository implements IPasswordResetRepository
      */
     public function createToken(string $email): string
     {
-        return  $this->model->create(['email'=> $email])->token;
+        return $this->model->create(['email' => $email])->token;
     }
 
     /**
@@ -33,7 +32,7 @@ class PasswordResetRepository implements IPasswordResetRepository
      */
     public function getByEmail(string $email): PasswordReset|null
     {
-        return  $this->model->where('email',$email)->first();
+        return $this->model->where('email', $email)->first();
     }
 
     /**
@@ -42,8 +41,7 @@ class PasswordResetRepository implements IPasswordResetRepository
      */
     public function deleteToken(PasswordReset $passwordResetToken): void
     {
-         $passwordResetToken->delete();
+        $passwordResetToken->delete();
     }
-
 
 }

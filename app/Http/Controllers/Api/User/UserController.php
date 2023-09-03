@@ -43,7 +43,6 @@ class UserController extends Controller
     }
 
 
-
     /**
      * @OA\POST(
      *     path="/api/v1/user/create",
@@ -147,7 +146,6 @@ class UserController extends Controller
 
         return successResponse();
     }
-
 
 
 }

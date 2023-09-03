@@ -15,7 +15,7 @@ use Tests\TestCase;
 class OrderControllerTest extends TestCase
 {
 
-    use JwtTokenHelper,RefreshDatabase;
+    use JwtTokenHelper, RefreshDatabase;
 
     protected User|null $user;
     protected string $token;
@@ -46,7 +46,6 @@ class OrderControllerTest extends TestCase
         $response->assertStatus(Response::HTTP_OK);
 
     }
-
 
 
 }

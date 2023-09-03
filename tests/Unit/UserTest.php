@@ -1,5 +1,5 @@
 <?php
-// tests/Unit/UserTest.php
+
 namespace Tests\Unit;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;

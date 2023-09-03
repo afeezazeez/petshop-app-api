@@ -13,7 +13,7 @@ use Tests\TestCase;
 
 class UserControllerTest extends TestCase
 {
-    use JwtTokenHelper,RefreshDatabase;
+    use JwtTokenHelper, RefreshDatabase;
 
     protected User|null $user;
     protected string $token;
@@ -25,7 +25,7 @@ class UserControllerTest extends TestCase
     {
         parent::setUp();
         $this->seed(UserSeeder::class);
-        $this->user = User::where('is_admin',0)->first() ?? null;
+        $this->user = User::where('is_admin', 0)->first() ?? null;
         $this->token = $this->generateToken($this->user);
 
     }
@@ -60,17 +60,16 @@ class UserControllerTest extends TestCase
             'is_marketing' => '1',
         ];
 
-        $response = $this->postJson(route('user.create'),$userPayload);
+        $response = $this->postJson(route('user.create'), $userPayload);
         $response->assertStatus(Response::HTTP_OK);
         $responseContent = $response->getContent();
         if (is_string($responseContent) && is_array(json_decode($responseContent, true)) && json_last_error() === JSON_ERROR_NONE) {
             $responseData = json_decode($responseContent, true);
-            $this->assertEquals($responseData['data']['email'],$userPayload['email']);
+            $this->assertEquals($responseData['data']['email'], $userPayload['email']);
         }
 
 
     }
-
 
 
 }

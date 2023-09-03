@@ -45,32 +45,24 @@ class Handler extends ExceptionHandler
     {
         if ($e instanceof ModelNotFoundException || $e instanceof NotFoundHttpException) {
             $error = 'Route not found';
-            if ($e instanceof ModelNotFoundException){
+            if ($e instanceof ModelNotFoundException) {
                 $modelName = class_basename($e->getModel());
                 $error = "$modelName not found";
             }
-            return errorResponse($error,[],null,[],Response::HTTP_NOT_FOUND);
-        }
-        elseif ($e instanceof ValidationException) {
-            return errorResponse('Failed validation',[],$e->validator->errors(),[],Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-        elseif ($e instanceof AuthenticationException) {
-            return errorResponse('Unauthorized',[],null, [],Response::HTTP_UNAUTHORIZED);
-        }
-
-        elseif ($e instanceof UnauthorizedHttpException) {
-            return errorResponse('Unauthorized',[],null, [],Response::HTTP_UNAUTHORIZED);
-        }
-
-        elseif ($e instanceof ClientErrorException) {
-            return errorResponse($e->getMessage(),[],null,[]);
+            return errorResponse($error, [], null, [], Response::HTTP_NOT_FOUND);
+        } elseif ($e instanceof ValidationException) {
+            return errorResponse('Failed validation', [], $e->validator->errors(), [], Response::HTTP_UNPROCESSABLE_ENTITY);
+        } elseif ($e instanceof AuthenticationException) {
+            return errorResponse('Unauthorized', [], null, [], Response::HTTP_UNAUTHORIZED);
+        } elseif ($e instanceof UnauthorizedHttpException) {
+            return errorResponse('Unauthorized', [], null, [], Response::HTTP_UNAUTHORIZED);
+        } elseif ($e instanceof ClientErrorException) {
+            return errorResponse($e->getMessage(), [], null, []);
+        } elseif ($e instanceof ThrottleRequestsException) {
+            return errorResponse('Max attempts exceeded.Retry later.', [], null, [], Response::HTTP_TOO_MANY_REQUESTS);
         }
 
-        elseif ($e instanceof ThrottleRequestsException) {
-            return errorResponse('Max attempts exceeded.Retry later.',[],null,[],Response::HTTP_TOO_MANY_REQUESTS);
-        }
-
-        return errorResponse($e->getMessage(),[],null,[],Response::HTTP_INTERNAL_SERVER_ERROR);
+        return errorResponse($e->getMessage(), [], null, [], Response::HTTP_INTERNAL_SERVER_ERROR);
 
     }
 }

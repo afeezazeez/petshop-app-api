@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
-    use HasFactory,UUID;
+    use HasFactory, UUID;
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +19,6 @@ class Payment extends Model
         'type',
         'details',
     ];
-
 
     protected $casts = [
         'details' => 'json',

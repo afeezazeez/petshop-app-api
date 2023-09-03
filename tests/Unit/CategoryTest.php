@@ -21,11 +21,11 @@ class CategoryTest extends TestCase
     public function testCategoryCanBeCreated(): void
     {
 
-        $category = Category::create(['title'=>'Electronics','slug'=>'electronic-appliances']);
+        $category = Category::create(['title' => 'Electronics', 'slug' => 'electronic-appliances']);
 
         $this->assertDatabaseHas('categories', [
             'title' => 'Electronics',
-            'slug'  => 'electronic-appliances'
+            'slug' => 'electronic-appliances'
         ]);
 
         $this->assertEquals('electronic-appliances', $category->slug);

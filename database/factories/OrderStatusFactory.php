@@ -17,7 +17,7 @@ class OrderStatusFactory extends Factory
     public function definition(): array
     {
         return [
-            'title'  => fake()->text(10)
+            'title' => fake()->text(10)
         ];
     }
 }

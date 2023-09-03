@@ -26,12 +26,12 @@ trait JwtTokenHelper
             'exp' => time() + 3600,
             'user_uuid' => $user?->uuid
         ];
-        if (!$privateKey){
+        if (!$privateKey) {
             throw new ClientErrorException("Error encountered while fetching private key");
         }
         $token = JWT::encode($payload, $privateKey, 'RS256');
 
-        JwtToken::create(['user_id' => $user?->id,'token_title' => 'access_token']);
+        JwtToken::create(['user_id' => $user?->id, 'token_title' => 'access_token']);
 
         return $token;
     }
@@ -39,11 +39,11 @@ trait JwtTokenHelper
     /**
      * @throws ClientErrorException
      */
-    protected function decodeToken(string $token):string
+    protected function decodeToken(string $token): string
     {
         $publicKey = file_get_contents(storage_path('app/public/keys/public-key.pem'));
 
-        if (!$publicKey){
+        if (!$publicKey) {
             throw new ClientErrorException("Error encountered while fetching public key");
         }
 

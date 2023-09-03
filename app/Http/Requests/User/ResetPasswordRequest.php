@@ -16,13 +16,13 @@ class ResetPasswordRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *@return array<string, mixed>
+     * @return array<string, mixed>
      */
     public function rules(): array
     {
         return [
-            'email' =>['exists:users','email','required'],
-            'token' =>['exists:password_resets,token','required'],
+            'email' => ['exists:users', 'email', 'required'],
+            'token' => ['exists:password_resets,token', 'required'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'password_confirmation' => ['required', 'string', 'min:6', 'same:password'],
         ];
@@ -30,7 +30,7 @@ class ResetPasswordRequest extends FormRequest
 
     /**
      * Messages
-     *@return array<string, mixed>
+     * @return array<string, mixed>
      */
     public function messages(): array
     {

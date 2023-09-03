@@ -21,7 +21,6 @@ interface IUserRepository
      */
     public function createUserAccount(array $data): User;
 
-
     /**
      * @return  array<string,mixed>
      */
@@ -35,16 +34,11 @@ interface IUserRepository
     /**
      * @param array<string,mixed> $data
      */
-    public function updateUserAccount(array $data):  User|null;
+    public function updateUserAccount(array $data): User|null;
 
+    public function deleteUser(string $uuid): void;
 
-    public function deleteUser(string $uuid):void;
-
-    public function deleteAuthUser():void;
-
-
-
-
+    public function deleteAuthUser(): void;
 
 
 }

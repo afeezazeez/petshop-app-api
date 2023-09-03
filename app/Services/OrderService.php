@@ -14,7 +14,6 @@ class OrderService
         $this->orderRepository = $orderRepository;
     }
 
-
     /**
      * Fetch user orders
      *

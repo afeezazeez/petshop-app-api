@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory,UUID,SoftDeletes;
+    use HasFactory, UUID, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +23,6 @@ class Product extends Model
         'description',
         'metadata'
     ];
-
 
     protected $casts = [
         'metadata' => 'json'

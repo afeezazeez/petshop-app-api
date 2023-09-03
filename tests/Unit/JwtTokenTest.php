@@ -13,7 +13,7 @@ use App\Models\User;
 
 class JwtTokenTest extends TestCase
 {
-    use RefreshDatabase,JwtTokenHelper;
+    use RefreshDatabase, JwtTokenHelper;
 
     protected User|null $user;
 
@@ -23,7 +23,7 @@ class JwtTokenTest extends TestCase
     {
         parent::setUp();
         $this->seed(UserSeeder::class);
-        $this->user = User::where('is_admin',1)->first() ?? null;
+        $this->user = User::where('is_admin', 1)->first() ?? null;
 
     }
 

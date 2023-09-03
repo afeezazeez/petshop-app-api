@@ -16,7 +16,7 @@ class FileFactory extends Factory
      */
     public function definition(): array
     {
-        $size = ['MB','GB','KB','TB'];
+        $size = ['MB', 'GB', 'KB', 'TB'];
         $mimeTypes = [
             'jpg' => 'image/jpeg',
             'jpeg' => 'image/jpeg',
@@ -26,9 +26,9 @@ class FileFactory extends Factory
 
 
         return [
-            'name'=>fake()->text(7).fake()->fileExtension(),
+            'name' => fake()->text(7) . fake()->fileExtension(),
             'path' => fake()->filePath(),
-            'size' => fake()->randomElement([1,500]). fake()->randomElement($size),
+            'size' => fake()->randomElement([1, 500]) . fake()->randomElement($size),
             'type' => fake()->randomElement($mimeTypes)
 
         ];

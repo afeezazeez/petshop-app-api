@@ -14,35 +14,35 @@ class PaymentSeeder extends Seeder
      */
     public function run(): void
     {
-        $payments_types = ['credit_card','cash_on_delivery','bank_transfer'];
+        $payments_types = ['credit_card', 'cash_on_delivery', 'bank_transfer'];
         $faker = Faker::create();
 
-        foreach ($payments_types as $type){
+        foreach ($payments_types as $type) {
             $details = [];
 
-            if ($type === 'credit_card'){
+            if ($type === 'credit_card') {
                 $details = [
                     'holder_name' => $faker->name,
-                    'number'  => $faker->creditCardNumber(),
-                    'cvv'=> $faker->randomNumber(3),
-                    'expire_date'=>$faker->creditCardExpirationDateString()
+                    'number' => $faker->creditCardNumber(),
+                    'cvv' => $faker->randomNumber(3),
+                    'expire_date' => $faker->creditCardExpirationDateString()
                 ];
 
             }
 
-            if ($type === 'cash_on_delivery'){
+            if ($type === 'cash_on_delivery') {
                 $details = [
                     'first_name' => $faker->firstName(),
-                    'last_name'  => $faker->lastName(),
-                    'address'    => $faker->address()
+                    'last_name' => $faker->lastName(),
+                    'address' => $faker->address()
                 ];
             }
 
-            if ($type === 'bank_transfer'){
+            if ($type === 'bank_transfer') {
                 $details = [
                     'swift' => $faker->swiftBicNumber(),
-                    'iban'  => $faker->iban(),
-                    'name'   => $faker->name()
+                    'iban' => $faker->iban(),
+                    'name' => $faker->name()
                 ];
             }
 

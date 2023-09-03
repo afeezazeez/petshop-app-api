@@ -18,12 +18,11 @@ class PasswordReset extends Model
     protected $fillable = [
         'email',
         'token',
-     ];
+    ];
 
     protected static function boot()
     {
         parent::boot();
-
         static::creating(function ($model) {
             $model->token = generateHashToken(config('app.token_length'));
         });

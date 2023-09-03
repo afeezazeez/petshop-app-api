@@ -13,13 +13,12 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 
-
 /**
  * @property int $id
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable,UUID;
+    use HasApiTokens, HasFactory, Notifiable, UUID;
 
     /**
      * The attributes that are mass assignable.
@@ -62,7 +61,7 @@ class User extends Authenticatable
 
     /**
      * Takes string password and Hashes it
-     *@return Attribute<string, string>
+     * @return Attribute<string, string>
      */
     public function password(): Attribute
     {
@@ -77,6 +76,4 @@ class User extends Authenticatable
     {
         return $this->HasMany(Order::class);
     }
-
-
 }

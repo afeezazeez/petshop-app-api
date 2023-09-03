@@ -20,8 +20,6 @@ class AdminUserController extends Controller
     }
 
 
-
-
     /**
      * @OA\GET(
      *     path="/api/v1/admin/user-listing",
@@ -69,13 +67,9 @@ class AdminUserController extends Controller
 
     public function index(): array
     {
-       return  $this->adminService->fetchUsers();
+        return $this->adminService->fetchUsers();
 
     }
-
-
-
-
 
 
     /**
@@ -156,9 +150,9 @@ class AdminUserController extends Controller
      * )
      */
 
-    public function update(UpdateUserRequest $request,string $uuid): JsonResponse
+    public function update(UpdateUserRequest $request, string $uuid): JsonResponse
     {
-        $data = $this->adminService->updateUser($uuid,$request->validated());
+        $data = $this->adminService->updateUser($uuid, $request->validated());
 
         return successResponse($data);
     }
@@ -184,8 +178,6 @@ class AdminUserController extends Controller
     public function destroy(string $uuid): JsonResponse
     {
         $this->adminService->deleteUser($uuid);
-
         return successResponse();
     }
 }
-

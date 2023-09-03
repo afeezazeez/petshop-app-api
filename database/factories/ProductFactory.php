@@ -20,16 +20,16 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         $category = Category::factory()->create();
-        $brand  = Brand::factory()->create();
-        $file  = File::factory()->create();
+        $brand = Brand::factory()->create();
+        $file = File::factory()->create();
         return [
             'category_uuid' => $category->uuid,
             'title' => fake()->text(10),
-            'price' => fake()->randomFloat(2,100,1000),
+            'price' => fake()->randomFloat(2, 100, 1000),
             'description' => fake()->text(50),
-            'metadata'  => [
+            'metadata' => [
                 'brand' => $brand->uuid,
-                'image' => $file-> uuid
+                'image' => $file->uuid
             ]
         ];
     }
